@@ -1,9 +1,9 @@
 import styled, { useTheme } from 'styled-components';
 
 import { getThemePreference } from '../utils';
-import { HeaderButtons } from './Buttons';
 import { SnapLogo } from './SnapLogo';
 import { Toggle } from './Toggle';
+import { ConnectButton, InstallFlaskButton } from './Buttons'; // Import buttons
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -47,14 +47,14 @@ export const Header = ({
     <HeaderWrapper>
       <LogoWrapper>
         <SnapLogo color={theme.colors.icon?.default} size={36} />
-        <Title>template-snap</Title>
+        <Title>FHEmix</Title> {/* Updated title */}
       </LogoWrapper>
       <RightContainer>
         <Toggle
           onToggle={handleToggleClick}
           defaultChecked={getThemePreference()}
         />
-        <HeaderButtons />
+        <ConnectButton /> {/* New button */}
       </RightContainer>
     </HeaderWrapper>
   );

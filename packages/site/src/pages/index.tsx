@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ConnectButton,
   InstallFlaskButton,
   ReconnectButton,
-  SendHelloButton,
   Card,
+  UseMixerButton,
+  OpenDocsButton,
 } from '../components';
 import { defaultSnapOrigin } from '../config';
 import {
@@ -50,6 +52,14 @@ const Subtitle = styled.p`
   ${({ theme }) => theme.mediaQueries.small} {
     font-size: ${({ theme }) => theme.fontSizes.text};
   }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 10rem;
 `;
 
 const CardContainer = styled.div`
@@ -114,21 +124,32 @@ const Index = () => {
     await invokeSnap({ method: 'hello' });
   };
 
+
+    const navigate = useNavigate();
+  
+    const handleClick = () => {
+      // Handle button click logic here
+      navigate('/mixer'); // Replace '/some-path' with the path you want to navigate to
+    };
+
   return (
     <Container>
       <Heading>
-        Welcome to <Span>template-snap</Span>
+        Welcome to <Span>FHEmix</Span>
       </Heading>
-      <Subtitle>
-        Get started by editing <code>src/index.ts</code>
-      </Subtitle>
+      <ButtonContainer>
+        {/* <ConnectButton onClick={requestSnap} disabled={!isMetaMaskReady} />
+        <SendHelloButton onClick={handleSendHelloClick} disabled={!installedSnap} /> */}
+        <UseMixerButton onClick={ handleClick } />
+        <OpenDocsButton />
+      </ButtonContainer>
       <CardContainer>
         {error && (
           <ErrorMessage>
             <b>An error happened:</b> {error.message}
           </ErrorMessage>
         )}
-        {!isMetaMaskReady && (
+        {/* {!isMetaMaskReady && (
           <Card
             content={{
               title: 'Install',
@@ -138,8 +159,8 @@ const Index = () => {
             }}
             fullWidth
           />
-        )}
-        {!installedSnap && (
+        )} */}
+        {/* {!installedSnap && (
           <Card
             content={{
               title: 'Connect',
@@ -154,8 +175,8 @@ const Index = () => {
             }}
             disabled={!isMetaMaskReady}
           />
-        )}
-        {shouldDisplayReconnectButton(installedSnap) && (
+        )} */}
+        {/* {shouldDisplayReconnectButton(installedSnap) && (
           <Card
             content={{
               title: 'Reconnect',
@@ -170,8 +191,8 @@ const Index = () => {
             }}
             disabled={!installedSnap}
           />
-        )}
-        <Card
+        )} */}
+        {/* <Card
           content={{
             title: 'Send Hello message',
             description:
@@ -189,15 +210,15 @@ const Index = () => {
             Boolean(installedSnap) &&
             !shouldDisplayReconnectButton(installedSnap)
           }
-        />
-        <Notice>
+        /> */}
+        {/* <Notice>
           <p>
             Please note that the <b>snap.manifest.json</b> and{' '}
             <b>package.json</b> must be located in the server root directory and
             the bundle must be hosted at the location specified by the location
             field.
           </p>
-        </Notice>
+        </Notice> */}
       </CardContainer>
     </Container>
   );

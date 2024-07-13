@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import type { FunctionComponent, ReactNode } from 'react';
 import { createContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -27,7 +28,11 @@ export const Root: FunctionComponent<RootProps> = ({ children }) => {
   return (
     <ToggleThemeContext.Provider value={toggleTheme}>
       <ThemeProvider theme={darkTheme ? dark : light}>
-        <MetaMaskProvider>{children}</MetaMaskProvider>
+        <MetaMaskProvider>
+          <Router>
+            {children}
+          </Router>
+        </MetaMaskProvider>
       </ThemeProvider>
     </ToggleThemeContext.Provider>
   );

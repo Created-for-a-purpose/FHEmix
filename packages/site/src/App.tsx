@@ -1,10 +1,13 @@
 import type { FunctionComponent, ReactNode } from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Footer, Header } from './components';
 import { GlobalStyle } from './config/theme';
 import { ToggleThemeContext } from './Root';
+import Index from './pages/index'; // Assuming your Index component is in pages folder
+import Mixer from './pages/Mixer'; // Create a new Mixer component
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,7 +29,10 @@ export const App: FunctionComponent<AppProps> = ({ children }) => {
       <GlobalStyle />
       <Wrapper>
         <Header handleToggleClick={toggleTheme} />
-        {children}
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/mixer" element={<Mixer />} />
+        </Routes>
         <Footer />
       </Wrapper>
     </>
