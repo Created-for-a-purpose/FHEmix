@@ -10,7 +10,7 @@ export const SnapLogo = ({
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
-fill="#6F4CFF" stroke="none">
+fill={color} stroke="none">
 <path d="M5305 9113 c-296 -63 -579 -250 -762 -504 -123 -170 -158 -269 -169
 -469 -3 -63 -8 -121 -10 -128 -3 -10 -24 1 -70 33 -72 51 -196 106 -314 137
 -58 15 -107 20 -215 20 -156 1 -252 -15 -373 -62 -83 -32 -80 -39 -36 75 35
