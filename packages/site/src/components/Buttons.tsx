@@ -7,17 +7,16 @@ import { shouldDisplayReconnectButton } from '../utils';
 
 const Link = styled.a`
   display: flex;
-  align-self: flex-start;
   align-items: center;
   justify-content: center;
-  font-size: ${(props) => props.theme.fontSizes.small};
+  font-size: ${(props) => props.theme.fontSizes.medium};
   border-radius: ${(props) => props.theme.radii.button};
   border: 1px solid ${(props) => props.theme.colors.background?.inverse};
   background-color: ${(props) => props.theme.colors.background?.inverse};
   color: ${(props) => props.theme.colors.text?.inverse};
   text-decoration: none;
   font-weight: bold;
-  padding: 1rem;
+  padding: 1.2rem 2rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
@@ -35,10 +34,51 @@ const Link = styled.a`
 
 const Button = styled.button`
   display: flex;
-  align-self: flex-start;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  border-radius: ${(props) => props.theme.radii.button};
+  border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+  background-color: ${(props) => props.theme.colors.background?.inverse};
+  color: ${(props) => props.theme.colors.text?.inverse};
+  font-weight: bold;
+  padding: 1.2rem 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 0.5rem 0;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+    color: ${(props) => props.theme.colors.text?.default};
+  }
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    width: 100%;
+  }
+`;
+
+const MainButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  border-radius: ${(props) => props.theme.radii.button};
+  border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+  background-color: ${(props) => props.theme.colors.background?.inverse};
+  color: ${(props) => props.theme.colors.text?.inverse};
+  font-weight: bold;
+  padding: 2.4rem 6rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 0.5rem 0;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.background?.inverse};
+    color: ${(props) => props.theme.colors.text?.default};
+  }
+
   ${({ theme }) => theme.mediaQueries.small} {
     width: 100%;
   }
@@ -50,24 +90,23 @@ const ButtonText = styled.span`
 
 const ConnectedContainer = styled.div`
   display: flex;
-  align-self: flex-start;
   align-items: center;
   justify-content: center;
-  font-size: ${(props) => props.theme.fontSizes.small};
+  font-size: ${(props) => props.theme.fontSizes.medium};
   border-radius: ${(props) => props.theme.radii.button};
   border: 1px solid ${(props) => props.theme.colors.background?.inverse};
   background-color: ${(props) => props.theme.colors.background?.inverse};
   color: ${(props) => props.theme.colors.text?.inverse};
   font-weight: bold;
-  padding: 1.2rem;
+  padding: 1.2rem 2rem;
 `;
 
 const ConnectedIndicator = styled.div`
-  content: ' ';
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background-color: green;
+  margin-right: 0.5rem;
 `;
 
 export const InstallFlaskButton = () => (
@@ -86,6 +125,15 @@ export const ConnectButton = (props: ComponentProps<typeof Button>) => {
   );
 };
 
+export const UseMixerButton = (props: ComponentProps<typeof Button>) => {
+  return (
+    <MainButton {...props}>
+      <FlaskFox />
+      <ButtonText>Use Mixer</ButtonText>
+    </MainButton>
+  );
+}
+
 export const ReconnectButton = (props: ComponentProps<typeof Button>) => {
   return (
     <Button {...props}>
@@ -95,8 +143,8 @@ export const ReconnectButton = (props: ComponentProps<typeof Button>) => {
   );
 };
 
-export const SendHelloButton = (props: ComponentProps<typeof Button>) => {
-  return <Button {...props}>Send message</Button>;
+export const OpenDocsButton = (props: ComponentProps<typeof Button>) => {
+  return <MainButton {...props}>Open Docs</MainButton>;
 };
 
 export const HeaderButtons = () => {
