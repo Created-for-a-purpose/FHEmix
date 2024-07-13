@@ -1,36 +1,66 @@
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { panel, text } from '@metamask/snaps-sdk';
+import type { OnRpcRequestHandler, OnUserInputHandler } from '@metamask/snaps-sdk';
+import { UserInputEventType } from '@metamask/snaps-sdk';
+import { panel, text, button, form, input, spinner } from '@metamask/snaps-sdk';
+import { ethers } from 'ethers';
 
-/**
- * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
- *
- * @param args - The request handler args as object.
- * @param args.origin - The origin of the request, e.g., the website that
- * invoked the snap.
- * @param args.request - A validated JSON-RPC request object.
- * @returns The result of `snap_dialog`.
- * @throws If the request method is not valid for this snap.
- */
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
   switch (request.method) {
     case 'hello':
+      const walletInterface = await snap.request({
+        method: 'snap_createInterface',
+        params: {
+          ui: panel([
+            text(`Hello!`),
+            text('Create a smart, recoverable wallet now'),
+            form('create_wallet_form', [
+              input({
+                name: 'Domain', label: 'Domain'
+              }),
+              input({
+                name: 'Password', label: 'Password', inputType: 'password'
+              }),
+              button({ value: 'Create', buttonType: 'submit', name: 'create_wallet' }),
+            ]),
+          ]),
+        }
+      });
       return snap.request({
         method: 'snap_dialog',
         params: {
           type: 'confirmation',
-          content: panel([
-            text(`Hello, **${origin}**!`),
-            text('This custom confirmation is just for display purposes.'),
-            text(
-              'But you can edit the snap source code to make it do something, if you want to!',
-            ),
-          ]),
+          id: walletInterface,
         },
       });
     default:
       throw new Error('Method not found.');
   }
 };
+
+export const onUserInput: OnUserInputHandler = async ({
+  id,
+  event,
+}) => {
+  if (event.type === UserInputEventType.FormSubmitEvent) {
+    switch (event.name) {
+      case 'create_wallet_form':
+        await snap.request({
+          method: 'snap_updateInterface',
+          params: {
+            id,
+            ui: panel([
+              text(`Creating wallet...`),
+              spinner(),
+            ])
+          },
+        });
+        await createWallet(event.value.Domain, event.value.Password);
+        break;
+    }
+  }
+}
+
+const createWallet = async (domain: any, password: any) => {
+} 
