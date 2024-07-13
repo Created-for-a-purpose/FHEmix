@@ -8,6 +8,7 @@ import {
   Card,
   UseMixerButton,
   OpenDocsButton,
+  CreateWalletButton,
 } from '../components';
 import { defaultSnapOrigin } from '../config';
 import {
@@ -125,12 +126,12 @@ const Index = () => {
   };
 
 
-    const navigate = useNavigate();
-  
-    const handleClick = () => {
-      // Handle button click logic here
-      navigate('/mixer'); // Replace '/some-path' with the path you want to navigate to
-    };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Handle button click logic here
+    navigate('/mixer'); // Replace '/some-path' with the path you want to navigate to
+  };
 
   return (
     <Container>
@@ -140,7 +141,7 @@ const Index = () => {
       <ButtonContainer>
         {/* <ConnectButton onClick={requestSnap} disabled={!isMetaMaskReady} />
         <SendHelloButton onClick={handleSendHelloClick} disabled={!installedSnap} /> */}
-        <UseMixerButton onClick={ handleClick } />
+        <UseMixerButton onClick={handleClick} />
         <OpenDocsButton />
       </ButtonContainer>
       <CardContainer>

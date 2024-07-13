@@ -2,9 +2,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import type { FunctionComponent, ReactNode } from 'react';
 import { createContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import { dark, light } from './config/theme';
-import { MetaMaskProvider } from './hooks';
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 import { getThemePreference, setLocalStorage } from './utils';
 
 export type RootProps = {
@@ -26,14 +25,20 @@ export const Root: FunctionComponent<RootProps> = ({ children }) => {
   };
 
   return (
-    <ToggleThemeContext.Provider value={toggleTheme}>
-      <ThemeProvider theme={darkTheme ? dark : light}>
-        <MetaMaskProvider>
+    <MetaMaskUIProvider sdkOptions={{
+      dappMetadata: {
+        name: 'My Dapp',
+        url: window.location.href,
+      },
+      infuraAPIKey: '2764e348a0d948a3b5ae126db084c18e'
+    }}>
+      <ToggleThemeContext.Provider value={toggleTheme}>
+        <ThemeProvider theme={darkTheme ? dark : light}>
           <Router>
             {children}
           </Router>
-        </MetaMaskProvider>
-      </ThemeProvider>
-    </ToggleThemeContext.Provider>
+        </ThemeProvider>
+      </ToggleThemeContext.Provider>
+    </MetaMaskUIProvider>
   );
 };

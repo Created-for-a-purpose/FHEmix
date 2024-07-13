@@ -1,14 +1,16 @@
 import type { OnRpcRequestHandler, OnUserInputHandler } from '@metamask/snaps-sdk';
 import { UserInputEventType } from '@metamask/snaps-sdk';
 import { panel, text, button, form, input, spinner } from '@metamask/snaps-sdk';
-import { ethers } from 'ethers';
+
+const verifierAddress = '0x083fBe8f5d44d8814fBec494c0851043D7808810'
+const walletFactoryAddress = '0xdecE08eA3b4E1A04e12CfFF26B50e9c4634544ab'
 
 export const onRpcRequest: OnRpcRequestHandler = async ({
   origin,
   request,
 }) => {
   switch (request.method) {
-    case 'hello':
+    case 'create_wallet':
       const walletInterface = await snap.request({
         method: 'snap_createInterface',
         params: {
@@ -56,11 +58,7 @@ export const onUserInput: OnUserInputHandler = async ({
             ])
           },
         });
-        await createWallet(event.value.Domain, event.value.Password);
         break;
     }
   }
 }
-
-const createWallet = async (domain: any, password: any) => {
-} 

@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react';
 import styled from 'styled-components';
-
 import { ReactComponent as FlaskFox } from '../assets/flask_fox.svg';
-import { useMetaMask, useRequestSnap } from '../hooks';
+import { useMetaMask, useRequestSnap, useInvokeSnap } from '../hooks';
 import { shouldDisplayReconnectButton } from '../utils';
 
 const Link = styled.a`
@@ -68,7 +67,7 @@ const MainButton = styled.button`
   background-color: ${(props) => props.theme.colors.background?.inverse};
   color: ${(props) => props.theme.colors.text?.inverse};
   font-weight: bold;
-  padding: 2.4rem 6rem;
+  padding: 2rem 6rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   margin: 0.5rem 0;
@@ -162,11 +161,4 @@ export const HeaderButtons = () => {
   if (shouldDisplayReconnectButton(installedSnap)) {
     return <ReconnectButton onClick={requestSnap} />;
   }
-
-  return (
-    <ConnectedContainer>
-      <ConnectedIndicator />
-      <ButtonText>Connected</ButtonText>
-    </ConnectedContainer>
-  );
 };

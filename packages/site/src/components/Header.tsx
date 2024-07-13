@@ -1,8 +1,10 @@
 import styled, { useTheme } from 'styled-components';
+import { useState } from 'react';
+import { useSDK } from "@metamask/sdk-react";
 import { getThemePreference } from '../utils';
 import { SnapLogo } from './SnapLogo';
 import { Toggle } from './Toggle';
-import { ConnectButton, InstallFlaskButton } from './Buttons'; // Import buttons
+import { MetaMaskButton } from "@metamask/sdk-react-ui";
 import { useNavigate } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
@@ -59,7 +61,7 @@ export const Header = ({
           onToggle={handleToggleClick}
           defaultChecked={getThemePreference()}
         />
-        <ConnectButton /> {/* New button */}
+        <MetaMaskButton theme={"light"} color="white" />
       </RightContainer>
     </HeaderWrapper>
   );

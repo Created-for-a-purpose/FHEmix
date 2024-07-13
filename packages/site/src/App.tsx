@@ -2,7 +2,6 @@ import type { FunctionComponent, ReactNode } from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import { Footer, Header } from './components';
 import { GlobalStyle } from './config/theme';
 import { ToggleThemeContext } from './Root';
