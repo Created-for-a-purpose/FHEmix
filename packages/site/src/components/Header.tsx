@@ -1,9 +1,9 @@
 import styled, { useTheme } from 'styled-components';
-
 import { getThemePreference } from '../utils';
 import { SnapLogo } from './SnapLogo';
 import { Toggle } from './Toggle';
 import { ConnectButton, InstallFlaskButton } from './Buttons'; // Import buttons
+import { useNavigate } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -19,6 +19,10 @@ const Title = styled.p`
   font-weight: bold;
   margin: 0;
   margin-left: 1.2rem;
+  cursor: pointer; /* Set cursor to pointer on hover */
+  &:hover {
+    text-decoration: underline; /* Optional: underline text on hover */
+  }
   ${({ theme }) => theme.mediaQueries.small} {
     display: none;
   }
@@ -42,12 +46,13 @@ export const Header = ({
   handleToggleClick(): void;
 }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <HeaderWrapper>
       <LogoWrapper>
         <SnapLogo color={theme.colors.icon?.default} size={36} />
-        <Title>FHEmix</Title> {/* Updated title */}
+        <Title onClick={() => navigate('/')}>FHEmix</Title> {/* Updated title */}
       </LogoWrapper>
       <RightContainer>
         <Toggle
