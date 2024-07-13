@@ -6,6 +6,7 @@ import { SnapLogo } from './SnapLogo';
 import { Toggle } from './Toggle';
 import { MetaMaskButton } from "@metamask/sdk-react-ui";
 import { useNavigate } from 'react-router-dom';
+import { HeaderButtons } from './Buttons';
 
 const HeaderWrapper = styled.header`
   display: flex;

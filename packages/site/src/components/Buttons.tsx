@@ -148,7 +148,12 @@ export const OpenDocsButton = (props: ComponentProps<typeof Button>) => {
 
 export const HeaderButtons = () => {
   const requestSnap = useRequestSnap();
+  const invokeSnap = useInvokeSnap();
   const { isFlask, installedSnap } = useMetaMask();
+
+  const createWallet = async () => {
+    await invokeSnap({ method: 'create_wallet' });
+  }
 
   if (!isFlask && !installedSnap) {
     return <InstallFlaskButton />;
@@ -158,7 +163,12 @@ export const HeaderButtons = () => {
     return <ConnectButton onClick={requestSnap} />;
   }
 
-  if (shouldDisplayReconnectButton(installedSnap)) {
-    return <ReconnectButton onClick={requestSnap} />;
-  }
+  // if (shouldDisplayReconnectButton(installedSnap)) {
+  //   return <ReconnectButton onClick={requestSnap} />;
+  // }
+  return (
+    <Button onClick={createWallet}>
+        Create Wallet
+    </Button>
+  )
 };

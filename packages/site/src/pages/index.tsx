@@ -8,7 +8,7 @@ import {
   Card,
   UseMixerButton,
   OpenDocsButton,
-  CreateWalletButton,
+  HeaderButtons
 } from '../components';
 import { defaultSnapOrigin } from '../config';
 import {
@@ -143,6 +143,7 @@ const Index = () => {
         <SendHelloButton onClick={handleSendHelloClick} disabled={!installedSnap} /> */}
         <UseMixerButton onClick={handleClick} />
         <OpenDocsButton />
+        <HeaderButtons />
       </ButtonContainer>
       <CardContainer>
         {error && (
