@@ -2,13 +2,12 @@
 
 pragma solidity ^0.8.19;
 
-import "@fhenixprotocol/contracts/FHE.sol";
 interface IERC20 {
     function mint(address recipient, uint256 amount) external returns (bool);
     function burn(address user, uint256 amount) external returns (bool);
 }
 
-contract Withdraw {
+contract ReceiverLinea {
     IERC20 token;
 
     constructor(address _token) {
@@ -21,7 +20,6 @@ contract Withdraw {
         bytes calldata _message
     ) external {
         (uint256 amount) = abi.decode(_message, (uint256));
-        euint128 _amount = FHE.asEuint128(amount);
         token.mint(msg.sender, amount);
     }
 }

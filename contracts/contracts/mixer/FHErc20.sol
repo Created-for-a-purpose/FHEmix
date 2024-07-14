@@ -47,7 +47,7 @@ contract Token is FHERC20 {
             encBalances[sender] = encBalances[sender] - amount; 
         }
 
-        function balance(eaddress account) public view returns (euint128) {
+        function balanceOf(eaddress account) public view returns (euint128) {
             return encBalances[account];
         }
 }

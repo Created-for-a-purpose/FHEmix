@@ -1,4 +1,5 @@
 {
-  "deployWalletContracts#Groth16Verifier": "0x083fBe8f5d44d8814fBec494c0851043D7808810",
-  "deployWalletContracts#WalletFactory": "0xdecE08eA3b4E1A04e12CfFF26B50e9c4634544ab"
+  "deployMixContracts#mERC20": "0xfd616f18356ec23e9B488Ed9302d02D2ae3d81d7",
+  "deployMixContracts#Deposit": "0xfE1D2189Fe6a09c3E21c88Fc353b69222897995c",
+  "deployMixContracts#ReceiverLinea": "0xA351582571361E97d752d64A2FBe6B645C8AB9eA"
 }

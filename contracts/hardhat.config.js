@@ -7,7 +7,12 @@ module.exports = {
   networks: {
     linea: {
       chainId: 59141,
-      url: `https://rpc.sepolia.linea.build/`,
+      url: `https://linea-sepolia.blockpi.network/v1/rpc/public`,
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    fhenix: {
+      chainId: 8008135,
+      url: 'https://api.helium.fhenix.zone',
       accounts: [process.env.PRIVATE_KEY],
     }
   },

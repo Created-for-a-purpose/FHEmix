@@ -5,7 +5,7 @@ pragma solidity ^0.8.19;
 import "@fhenixprotocol/contracts/FHE.sol";
 import "./IFHErc20.sol";
 
-contract Withdraw {
+contract ReceiverFhenix {
     IFHErc20 token;
 
     constructor(address _token) {
