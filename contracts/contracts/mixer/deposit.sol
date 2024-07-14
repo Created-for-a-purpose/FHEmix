@@ -3,7 +3,11 @@
 pragma solidity ^0.8.19;
 
 import { IMailbox } from "@hyperlane-xyz/core/contracts/interfaces/IMailbox.sol";
-import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+interface IERC20 {
+    function mint(address recipient, uint256 amount) external returns (bool);
+    function burn(address user, uint256 amount) external returns (bool);
+}
 
 contract Deposit {
     IERC20 token;
@@ -23,5 +27,6 @@ contract Deposit {
             bytes32(uint256(uint160(contractAddress))),
             data
         );
-    } 
+        token.burn(msg.sender, amount);
+    }
 }
