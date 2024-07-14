@@ -13,6 +13,8 @@
     "hardhat": "^2.22.6"
   },
   "dependencies": {
+    "@fhenixprotocol/contracts": "^0.2.1",
+    "@hyperlane-xyz/core": "^4.1.0",
     "dotenv": "^16.4.5"
   }
 }
