@@ -14,17 +14,19 @@ contract Token is FHERC20 {
         mapping(eaddress => euint128) private encBalances;
 
         function mintEncrypted(euint128 encryptedAmount) public {
-            if (!FHE.isInitialized(_encBalances[msg.sender])) {
-                _encBalances[msg.sender] = encryptedAmount;
+            eaddress sender = FHE.asEaddress(msg.sender);
+            if (!FHE.isInitialized(encBalances[sender])) {
+                encBalances[sender] = encryptedAmount;
             } else {
-                _encBalances[msg.sender] = _encBalances[msg.sender] + encryptedAmount;
+                encBalances[sender] = encBalances[sender] + encryptedAmount;
             }
 
             totalEncryptedSupply = totalEncryptedSupply + encryptedAmount;
         }        
 
         function transfer(eaddress receiver, euint128 amount) public {
-            euint128 balance = _encBalances[msg.sender];
+            eaddress sender = FHE.asEaddress(msg.sender);
+            euint128 balance = encBalances[sender];
             FHE.req(balance.gte(amount));
 
             if (!FHE.isInitialized(encBalances[receiver])) {
@@ -32,7 +34,7 @@ contract Token is FHERC20 {
             } else {
                 encBalances[receiver] = encBalances[receiver] + amount;
             }
-            _encBalances[msg.sender] = _encBalances[msg.sender] - amount; 
+            encBalances[sender] = encBalances[sender] - amount; 
         }
 
         function transferFrom(eaddress sender, eaddress receiver, euint128 amount) public {
@@ -47,7 +49,13 @@ contract Token is FHERC20 {
             encBalances[sender] = encBalances[sender] - amount; 
         }
 
-        function balanceOf(eaddress account) public view returns (euint128) {
+        function encryptedBalance(eaddress account) public view returns (euint128) {
             return encBalances[account];
+        }
+
+        function mockFill(uint256 amount) public {
+            eaddress sender = FHE.asEaddress(msg.sender);
+            encBalances[sender] = encBalances[sender] + FHE.asEuint128(amount);
+            totalEncryptedSupply = totalEncryptedSupply + FHE.asEuint128(amount);
         }
 }

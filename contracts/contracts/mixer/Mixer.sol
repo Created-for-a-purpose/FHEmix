@@ -57,4 +57,9 @@ contract Mixer {
         euint128 balance2 = deposits[receiver];
         deposits[receiver] = balance2 + amount;
     }
+
+    function peekAddress() public view returns (eaddress) {
+        eaddress sender = FHE.asEaddress(msg.sender);
+        return sender;
+    }
 }
